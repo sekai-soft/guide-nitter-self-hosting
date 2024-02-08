@@ -4,8 +4,6 @@ services:
   nitter:
     image: ghcr.io/sekai-soft/nitter:master
     container_name: nitter
-    ports:
-      - "8080:80"
     volumes:
       - ./nitter.example.conf:/src/nitter.conf:Z,ro  # TODO: change host file to ./nitter.conf when customized
       - ./nitter-guest_accounts.json:/src/guest_accounts.json:Z,ro
@@ -22,6 +20,7 @@ services:
       - no-new-privileges:true
     cap_drop:
       - ALL
+    network_mode: service:nitter-ts
   nitter-redis:
     image: redis:6-alpine
     container_name: nitter-redis
@@ -74,6 +73,20 @@ services:
       interval: 10s
       start_period: 30s
     restart: unless-stopped
+  nitter-ts:
+    image: tailscale/tailscale:latest
+    container_name: nitter-ts
+    hostname: nitter
+    environment:
+      TS_AUTHKEY: ${TS_AUTHKEY}
+      TS_STATE_DIR: /var/lib/tailscale
+    volumes:
+      - nitter-ts:/var/lib/tailscale
+      - /dev/net/tun:/dev/net/tun
+    cap_add:
+      - net_admin
+      - sys_module
+    restart: unless-stopped
   miniflux-ts:
     image: tailscale/tailscale:latest
     container_name: miniflux-ts
@@ -92,3 +105,4 @@ volumes:
   nitter-redis:
   miniflux-db:
   miniflux-ts:
+  nitter-ts:
