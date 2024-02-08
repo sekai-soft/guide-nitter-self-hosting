@@ -5,7 +5,7 @@ services:
     image: ghcr.io/sekai-soft/nitter:master
     container_name: nitter
     ports:
-      - "127.0.0.1:8080:8080" # Replace with "8080:8080" if you don't use a reverse proxy
+      - "8080:80"
     volumes:
       - ./nitter.example.conf:/src/nitter.conf:Z,ro  # TODO: change host file to ./nitter.conf when customized
       - ./nitter-guest_accounts.json:/src/guest_accounts.json:Z,ro
@@ -13,7 +13,7 @@ services:
       - nitter-redis
     restart: unless-stopped
     healthcheck:
-      test: wget -nv --tries=1 --spider http://127.0.0.1:8080 || exit 1
+      test: wget -nv --tries=1 --spider http://127.0.0.1:80 || exit 1
       interval: 30s
       timeout: 5s
       retries: 2
@@ -53,7 +53,7 @@ services:
     healthcheck:
       test: ["CMD", "/usr/bin/miniflux", "-healthcheck", "auto"]
     ports:
-      - "8081:8080"
+      - "8081:80"
     depends_on:
       miniflux-db:
         condition: service_healthy
@@ -65,6 +65,7 @@ services:
       - CREATE_ADMIN=1
       - ADMIN_USERNAME=admin
       - ADMIN_PASSWORD=test123
+      - PORT=80
   miniflux-db:
     image: postgres:15
     environment:
