@@ -153,5 +153,6 @@ if not authentication:
 	print("Failed to authenticate")
 	exit(1)
 
-print("Copy paste the following line to guest_accounts.json:")
-print(json.dumps([authentication], indent=4))
+print()
+print("In terminal, run the following command:")
+print(f"echo '{json.dumps([authentication])}' > nitter-guest_accounts.json")
