@@ -17,7 +17,6 @@ services:
       interval: 30s
       timeout: 5s
       retries: 2
-    user: "998:998"
     read_only: true
     security_opt:
       - no-new-privileges:true
@@ -35,12 +34,6 @@ services:
       interval: 30s
       timeout: 5s
       retries: 2
-    user: "999:1000"
-    read_only: true
-    security_opt:
-      - no-new-privileges:true
-    cap_drop:
-      - ALL
   nitter-auth:
     build:
       context: nitter-auth
@@ -50,10 +43,9 @@ services:
     tty: true
   miniflux:
     image: miniflux/miniflux:latest
+    container_name: miniflux
     healthcheck:
       test: ["CMD", "/usr/bin/miniflux", "-healthcheck", "auto"]
-    ports:
-      - "8081:80"
     depends_on:
       miniflux-db:
         condition: service_healthy
@@ -66,8 +58,11 @@ services:
       - ADMIN_USERNAME=admin
       - ADMIN_PASSWORD=test123
       - PORT=80
+    restart: unless-stopped
+    network_mode: service:miniflux-ts
   miniflux-db:
     image: postgres:15
+    container_name: miniflux-db
     environment:
       - POSTGRES_USER=miniflux
       - POSTGRES_PASSWORD=secret
@@ -78,6 +73,22 @@ services:
       test: ["CMD", "pg_isready", "-U", "miniflux"]
       interval: 10s
       start_period: 30s
+    restart: unless-stopped
+  miniflux-ts:
+    image: tailscale/tailscale:latest
+    container_name: miniflux-ts
+    hostname: miniflux
+    environment:
+      TS_AUTHKEY: ${TS_AUTHKEY}
+      TS_STATE_DIR: /var/lib/tailscale
+    volumes:
+      - miniflux-ts:/var/lib/tailscale
+      - /dev/net/tun:/dev/net/tun
+    cap_add:
+      - net_admin
+      - sys_module
+    restart: unless-stopped
 volumes:
   nitter-redis:
   miniflux-db:
+  miniflux-ts:

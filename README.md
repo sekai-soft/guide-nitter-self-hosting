@@ -2,5 +2,5 @@
 
 ```
 docker compose run --build nitter-auth
-docker compose up nitter miniflux
+docker compose up --scale nitter-auth=0
 ```
