@@ -1,0 +1,52 @@
+version: "3"
+
+services:
+  nitter:
+    image: ghcr.io/sekai-soft/nitter:master
+    container_name: nitter
+    ports:
+      - "127.0.0.1:8080:8080" # Replace with "8080:8080" if you don't use a reverse proxy
+    volumes:
+      - ./nitter.example.conf:/src/nitter.conf:Z,ro  # TODO: change host file to ./nitter.conf when customized
+      - ./guest_accounts.json:/src/guest_accounts.json:Z,ro
+    depends_on:
+      - nitter-redis
+    restart: unless-stopped
+    healthcheck:
+      test: wget -nv --tries=1 --spider http://127.0.0.1:8080 || exit 1
+      interval: 30s
+      timeout: 5s
+      retries: 2
+    user: "998:998"
+    read_only: true
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+  nitter-redis:
+    image: redis:6-alpine
+    container_name: nitter-redis
+    command: redis-server --save 60 1 --loglevel warning
+    volumes:
+      - nitter-redis:/data
+    restart: unless-stopped
+    healthcheck:
+      test: redis-cli ping
+      interval: 30s
+      timeout: 5s
+      retries: 2
+    user: "999:1000"
+    read_only: true
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+  nitter-auth:
+    build:
+      context: nitter-auth
+      dockerfile: Dockerfile
+    container_name: nitter-auth
+    stdin_open: true
+    tty: true
+volumes:
+  nitter-redis:
