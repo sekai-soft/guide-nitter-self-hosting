@@ -102,6 +102,7 @@ services:
       - sys_module
   rss-lambda:
     image: ghcr.io/k-t-corp/rss-lambda:latest
+    container_name: rss-lambda
     restart: unless-stopped
     network_mode: service:rss-lambda-ts
   rss-lambda-ts:
