@@ -103,6 +103,7 @@ services:
   rss-lambda:
     image: ghcr.io/k-t-corp/rss-lambda:latest
     restart: unless-stopped
+    network_mode: service:rss-lambda-ts
   rss-lambda-ts:
     image: tailscale/tailscale:latest
     container_name: rss-lambda-ts
