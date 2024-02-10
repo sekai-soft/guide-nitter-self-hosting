@@ -57,6 +57,7 @@ services:
       - ADMIN_USERNAME=admin
       - ADMIN_PASSWORD=test123
       - PORT=80
+      - BASE_URL=http://miniflux/
     restart: unless-stopped
     network_mode: service:miniflux-ts
   miniflux-db:
