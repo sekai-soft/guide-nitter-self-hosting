@@ -100,9 +100,25 @@ services:
     cap_add:
       - net_admin
       - sys_module
+  rss-lambda:
+    image: ghcr.io/k-t-corp/rss-lambda:latest
     restart: unless-stopped
+  rss-lambda-ts:
+    image: tailscale/tailscale:latest
+    container_name: rss-lambda-ts
+    hostname: rss-lambda
+    environment:
+      TS_AUTHKEY: ${TS_AUTHKEY}
+      TS_STATE_DIR: /var/lib/tailscale
+    volumes:
+      - rss-lambda-ts:/var/lib/tailscale
+      - /dev/net/tun:/dev/net/tun
+    cap_add:
+      - net_admin
+      - sys_module
 volumes:
   nitter-redis:
   miniflux-db:
   miniflux-ts:
   nitter-ts:
+  rss-lambda-ts:
