@@ -105,6 +105,8 @@ services:
     container_name: rss-lambda
     restart: unless-stopped
     network_mode: service:rss-lambda-ts
+    environment:
+      - PORT=80
   rss-lambda-ts:
     image: tailscale/tailscale:latest
     container_name: rss-lambda-ts
