@@ -1,4 +1,7 @@
 # FreeBird
+A guide for self-hosting a Nitter instance
+
+🚧 WIP 🚧
 
 ```
 docker compose run --build nitter-auth
