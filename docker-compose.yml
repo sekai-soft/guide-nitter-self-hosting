@@ -59,6 +59,7 @@ services:
       - PORT=80
       - BASE_URL=http://miniflux/
       - LOG_DATE_TIME=1
+      - POLLING_FREQUENCY=720
     restart: unless-stopped
     network_mode: service:miniflux-ts
   miniflux-db:
@@ -75,6 +76,11 @@ services:
       interval: 10s
       start_period: 30s
     restart: unless-stopped
+  miniflux-chilled-refresher:
+    build:
+      context: miniflux-chilled-refresher
+      dockerfile: Dockerfile
+    container_name: miniflux-chilled-refresher
   nitter-ts:
     image: tailscale/tailscale:latest
     container_name: nitter-ts
