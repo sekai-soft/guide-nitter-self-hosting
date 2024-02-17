@@ -70,9 +70,9 @@ Optionally, if you want crossposting from Twitter to Mastodon, follow [this guid
 
 5. Run this command to spin up the services!
 ```
-docker compose up --scale nitter-auth=0 nitter-xposter=0
-# in order to run the crossposter as well, run this
-# docker compose up --scale nitter-auth=0
+docker compose up -d --scale nitter-auth=0 --scale nitter-xposter=0
+# if you want to run the crossposter as well, run this
+# docker compose up -d --scale nitter-auth=0 
 ```
 If everything goes well, you should now be able to
 * Access your private Nitter instance from `http://nitter` on devices that have Tailscale client installed
@@ -80,6 +80,8 @@ If everything goes well, you should now be able to
     * In your miniflux interface, you can follow Twitter accounts as RSS feeds using the URL `http://nitter/<twitter handle>/rss`
 
 ### I only want a Nitter instance and without Tailscale
+Notice: since I personally do not use this configuration, it may get bug fixes and improvements slower than the "I want everything!" configuration.
+
 1. Clone this repo on your NAS/server.
 ```
 git clone https://github.com/sekai-soft/freebird && cd freebird
@@ -93,7 +95,10 @@ At the end of the command run, follow instructions "In terminal, run the followi
 
 3. Run this command to spin up the services!
 ```
-docker compose -f docker-compose.nitter.yml up --scale nitter-auth=0
+docker compose -f docker-compose.nitter.yml up -d --scale nitter-auth=0
 ```
 If everything goes well, you should now be able to
 * Access your Nitter instance from `http://localhost:8080`
+
+## Like what you see?
+Consider support us on [Patreon](https://www.patreon.com/sekaisoft) :)
