@@ -81,6 +81,8 @@ services:
       context: miniflux-chilled-refresher
       dockerfile: Dockerfile
     container_name: miniflux-chilled-refresher
+    depends_on:
+      - miniflux
   nitter-ts:
     image: tailscale/tailscale:latest
     container_name: nitter-ts
