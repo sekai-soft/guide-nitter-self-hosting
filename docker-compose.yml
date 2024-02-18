@@ -83,6 +83,7 @@ services:
     container_name: miniflux-chilled-refresher
     depends_on:
       - miniflux
+    restart: unless-stopped
   nitter-ts:
     image: tailscale/tailscale:latest
     container_name: nitter-ts
