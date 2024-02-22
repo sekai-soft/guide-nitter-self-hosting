@@ -146,6 +146,17 @@ services:
       MASTODON_CLIENT_SECRET: ${MASTODON_CLIENT_SECRET}
       MASTODON_ACCESS_TOKEN: ${MASTODON_ACCESS_TOKEN}
       MASTODON_STATUS_LIMIT: '10'
+    restart: unless-stopped
+  nitter-xposter-bsky:
+    image: ghcr.io/k-t-corp/nitter-xposter:latest
+    container_name: nitter-xposter-bsky
+    volumes:
+      - nitter-xposter-bsky:/app/dbs
+    environment:
+      SQLITE_FILE: /app/dbs/db.db
+      NITTER_HOST: nitter
+      NITTER_HTTPS: 'false'
+      TWITTER_HANDLE: ${TWITTER_HANDLE}
       BSKY_HANDLE: ${BSKY_HANDLE}
       BSKY_PASSWORD: ${BSKY_PASSWORD}
       BSKY_STATUS_LIMIT: '10'
@@ -157,3 +168,4 @@ volumes:
   nitter-ts:
   rss-lambda-ts:
   nitter-xposter:
+  nitter-xposter-bsky:
