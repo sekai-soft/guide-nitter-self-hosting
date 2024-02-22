@@ -146,6 +146,9 @@ services:
       MASTODON_CLIENT_SECRET: ${MASTODON_CLIENT_SECRET}
       MASTODON_ACCESS_TOKEN: ${MASTODON_ACCESS_TOKEN}
       MASTODON_STATUS_LIMIT: '10'
+      BSKY_HANDLE: ${BSKY_HANDLE}
+      BSKY_PASSWORD: ${BSKY_PASSWORD}
+      BSKY_STATUS_LIMIT: '10'
     restart: unless-stopped
 volumes:
   nitter-redis:
