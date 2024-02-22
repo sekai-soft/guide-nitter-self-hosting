@@ -17,7 +17,10 @@ while True:
     feeds = client.get_feeds()
     for feed in feeds:
         logging.info(f"Refreshing {feed['feed_url']}")
-        client.refresh_feed(feed['id'])
+        try:
+            client.refresh_feed(feed['id'])
+        except miniflux.ClientError as e:
+            logging.error(f"Error refreshing {feed['feed_url']} but continuing: {e}")
         feed_sleep_seconds = refresh_interval_seconds + random.randint(1, refresh_interval_seconds)
         logging.info(f"Feed sleeping for {feed_sleep_seconds} seconds")
         time.sleep(feed_sleep_seconds)
