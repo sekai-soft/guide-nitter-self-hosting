@@ -5,7 +5,7 @@ services:
     image: ghcr.io/sekai-soft/nitter:master
     container_name: nitter
     volumes:
-      - ./nitter.example.conf:/src/nitter.conf:Z,ro  # TODO: change host file to ./nitter.conf when customized
+      - ./nitter.conf:/src/nitter.conf:Z,ro  # TODO: change host file to ./nitter.conf when customized
       - ./nitter-guest_accounts.json:/src/guest_accounts.json:Z,ro
     depends_on:
       - nitter-redis

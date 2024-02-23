@@ -68,7 +68,16 @@ On the `.env` file, fill in
 
 Optionally, if you want crossposting from Twitter to Mastodon, follow [this guide](https://github.com/k-t-corp/nitter-xposter?tab=readme-ov-file#obtain-mastodon-credentials) to fill in the rest of `.env` file
 
-5. Run this command to spin up the services!
+5. Customize your Nitter instance
+```
+cp nitter.example.conf nitter.conf
+```
+Some customizations you can make to your Nitter instance in the `nitter.conf` file
+* `title`: Name of your Nitter instance shown on the web UI
+* `theme`: Default theme of the web UI. Available options are `Black`, `Dracula`, `Mastodon`, `Nitter`, `Pleroma`, `Twitter` and `Twitter Dark`.
+* `infiniteScroll`: Whether to enable infinite scrolling. Enabling this option will load Javascript on the web UI.
+
+6. Run this command to spin up the services!
 ```
 docker compose up -d --scale nitter-auth=0 --scale nitter-xposter=0
 # if you want to run the crossposter as well, run this
@@ -93,7 +102,16 @@ docker compose run --build nitter-auth
 ```
 At the end of the command run, follow instructions "In terminal, run the following command"
 
-3. Run this command to spin up the services!
+3. Customize your Nitter instance
+```
+cp nitter.example.conf nitter.conf
+```
+Some customizations you can make to your Nitter instance in the `nitter.conf` file
+* `title`: Name of your Nitter instance shown on the web UI
+* `theme`: Default theme of the web UI. Available options are `Black`, `Dracula`, `Mastodon`, `Nitter`, `Pleroma`, `Twitter` and `Twitter Dark`.
+* `infiniteScroll`: Whether to enable infinite scrolling. Enabling this option will load Javascript on the web UI.
+
+4. Run this command to spin up the services!
 ```
 docker compose -f docker-compose.nitter.yml up -d --scale nitter-auth=0
 ```
