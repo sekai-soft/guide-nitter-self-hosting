@@ -160,6 +160,7 @@ services:
       BSKY_HANDLE: ${BSKY_HANDLE}
       BSKY_PASSWORD: ${BSKY_PASSWORD}
       BSKY_STATUS_LIMIT: '10'
+      INTERVAL_MINUTES: '30'
     restart: unless-stopped
 volumes:
   nitter-redis:

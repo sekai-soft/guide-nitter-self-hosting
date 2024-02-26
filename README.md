@@ -79,7 +79,7 @@ Some customizations you can make to your Nitter instance in the `nitter.conf` fi
 
 6. Run this command to spin up the services!
 ```
-docker compose up -d --scale nitter-auth=0 --scale nitter-xposter=0
+docker compose up -d --scale nitter-auth=0 --scale nitter-xposter=0 --scale nitter-xposter-bsky=0
 # if you want to run the crossposter as well, run this
 # docker compose up -d --scale nitter-auth=0 
 ```
