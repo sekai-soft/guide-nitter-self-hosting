@@ -5,7 +5,7 @@ services:
     image: ghcr.io/sekai-soft/nitter:master
     container_name: nitter
     volumes:
-      - ./nitter.conf:/src/nitter.conf:Z,ro  # TODO: change host file to ./nitter.conf when customized
+      - ./nitter.conf:/src/nitter.conf:Z,ro
       - ./nitter-guest_accounts.json:/src/guest_accounts.json:Z,ro
     depends_on:
       - nitter-redis
@@ -131,42 +131,9 @@ services:
     cap_add:
       - net_admin
       - sys_module
-  nitter-xposter:
-    image: ghcr.io/k-t-corp/nitter-xposter:latest
-    container_name: nitter-xposter
-    volumes:
-      - nitter-xposter:/app/dbs
-    environment:
-      SQLITE_FILE: /app/dbs/db.db
-      NITTER_HOST: nitter
-      NITTER_HTTPS: 'false'
-      TWITTER_HANDLE: ${TWITTER_HANDLE}
-      MASTODON_HOST: ${MASTODON_HOST}
-      MASTODON_CLIENT_ID: ${MASTODON_CLIENT_ID}
-      MASTODON_CLIENT_SECRET: ${MASTODON_CLIENT_SECRET}
-      MASTODON_ACCESS_TOKEN: ${MASTODON_ACCESS_TOKEN}
-      MASTODON_STATUS_LIMIT: '10'
-    restart: unless-stopped
-  nitter-xposter-bsky:
-    image: ghcr.io/k-t-corp/nitter-xposter:latest
-    container_name: nitter-xposter-bsky
-    volumes:
-      - nitter-xposter-bsky:/app/dbs
-    environment:
-      SQLITE_FILE: /app/dbs/db.db
-      NITTER_HOST: nitter
-      NITTER_HTTPS: 'false'
-      TWITTER_HANDLE: ${TWITTER_HANDLE}
-      BSKY_HANDLE: ${BSKY_HANDLE}
-      BSKY_PASSWORD: ${BSKY_PASSWORD}
-      BSKY_STATUS_LIMIT: '10'
-      INTERVAL_MINUTES: '30'
-    restart: unless-stopped
 volumes:
   nitter-redis:
   miniflux-db:
   miniflux-ts:
   nitter-ts:
   rss-lambda-ts:
-  nitter-xposter:
-  nitter-xposter-bsky:
