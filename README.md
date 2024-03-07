@@ -159,7 +159,7 @@ docker compose -f docker-compose.nitter-xposter.yml up -d --scale nitter-auth=0 
 
 To verify that this works, run
 ```
-docker compose logs
+docker compose -f docker-compose.nitter-xposter.yml logs
 ```
 to see logs emitted from `nitter-xposter`
 
