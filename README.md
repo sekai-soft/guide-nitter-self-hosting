@@ -87,7 +87,9 @@ If everything goes well, you should now be able to
     * In your miniflux interface, you can follow Twitter accounts as RSS feeds using the URL `http://nitter/<twitter handle>/rss`
 
 ### I only want a Nitter instance and without Tailscale
-Notice: since I personally do not use this configuration, it may get bug fixes and improvements slower than the "I want everything!" configuration.
+Notice: Since this setup exposes the Nitter instance on port 8080, depending on your Docker/host/firewall setup, the instance could be exposed to the Internet and be abused by scapers.
+
+If you choose to use this setup, make sure that you either 1) set it up in your home NAS/server where you know scrapers on the Internet cannot access, or 2) set up some kind of rate-limit mechanism such as `fail2ban` if the instance is hosted on a VPS.
 
 1. Clone this repo on your NAS/server.
 ```

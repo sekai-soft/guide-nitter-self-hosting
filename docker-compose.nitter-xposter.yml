@@ -6,8 +6,8 @@ services:
   nitter:
     image: ghcr.io/sekai-soft/nitter:master
     # container_name: nitter
-    ports:
-      - "8080:80"
+    # ports:
+    #   - "8080:80"
     volumes:
       - ./nitter.conf:/src/nitter.conf:Z,ro
       - ./nitter-guest_accounts.json:/src/guest_accounts.json:Z,ro
