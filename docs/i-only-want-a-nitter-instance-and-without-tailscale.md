@@ -25,13 +25,13 @@ Some customizations you can make to your Nitter instance in the `nitter.conf` fi
 * `infiniteScroll`: Whether to enable infinite scrolling. Enabling this option will load Javascript on the web UI.
 
 4. Create a `.htpasswd` file
-Go to a website (I used https://iplocation.io/htaccess-secure-directory) or use the `htpasswd` CLI to generate a `.htpasswd` file under this directory.
+Go to a website (I used https://iplocation.io/htaccess-secure-directory) or use the `htpasswd` CLI to generate a `.htpasswd` file under this directory. **This will be the username/password combo that protected the web interfaces of the Nitter instance.**
 
 5. Customize your nginx configuration
 ```
 cp nitter-guardian.nginx.example.conf nitter-guardian.nginx.conf
 ```
-**Be sure to replace `RSS_PASSWORD` in your `nitter-guardian.nginx.conf` with your own. This will be the password to your Nitter instance's RSS feeds**
+**Be sure to replace `RSS_PASSWORD` in your `nitter-guardian.nginx.conf` with your own. This will be the password that proteced RSS feeds of the Nitter instance**
 
 6. Run this command to run the services
 ```

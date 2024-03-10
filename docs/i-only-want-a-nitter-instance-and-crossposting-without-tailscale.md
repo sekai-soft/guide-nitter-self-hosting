@@ -1,4 +1,4 @@
-### I only want a Nitter instance and a nitter-xposter instance without Tailscale
+### I only want a Nitter instance and crossposting without Tailscale
 1. Clone this repo on your NAS/server.
 ```
 git clone https://github.com/sekai-soft/freebird && cd freebird
