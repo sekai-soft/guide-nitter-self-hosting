@@ -42,6 +42,12 @@ Some customizations you can make to your Nitter instance in the `fly.nitter.conf
 
 Go to a website (I used https://iplocation.io/htaccess-secure-directory) or use the `htpasswd` CLI to generate a `.htpasswd` file under this directory. **This will be the username/password combo that protects the web interfaces of the Nitter instance.**
 
+The resulting `.htpasswd` file's content should look something like
+
+```
+username:$apr1$somehash...
+```
+
 9. Customize your nginx configuration
 ```
 cp fly.nginx-site.example.conf fly.nginx-site.conf
