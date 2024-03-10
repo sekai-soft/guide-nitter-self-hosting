@@ -12,7 +12,7 @@ However, regardless of the demise of public Nitter instances, it is still possib
 
 ## What can you expect
 * A [Nitter](https://github.com/zedeus/nitter) instance
-    * Notice that only 1) viewing profiles and 2) view individual tweets are the pages/RSS feeds that I personally use and can commit offering support to. Other pages on the Nitter web interface such as searching are NOT guaranteed to work.
+    * Notice that only 1) viewing profiles and 2) view individual tweets are the pages/RSS feeds that I personally use and can commit offering support to. I personally cannot commit to offering support for other pages/RSS feeds such as search.
     * The Nitter instance is also protected by either 1) an nginx instance that password-protects all web interfaces and RSS feeds or 2) a Tailscale private network so that only you on your personal devices can access the Nitter instance. The reason for such protection is rampant web scrapers that can cause your instance to be heavily rate limited by Twitter's servers.
 
 Depending on the setup you pick later, you can optionally have
@@ -27,8 +27,8 @@ Depending on the setup you pick later, you can optionally have
 * Some Linux and terminal knowledge
 
 ## Decide where to host the Nitter instance
-* [fly.io, a Platform-as-a-Service hosting provider](https://fly.io/) -> [go to here](#host-on-flyio)
-* A server or NAS -> [go to here](#host-on-a-server-or-nas)
+* [fly.io, a Platform-as-a-Service hosting provider](https://fly.io/) -> [go to the "Host on fly.io" section](#host-on-flyio)
+* A server or NAS -> [go to the "Host on a server or NAS" section](#host-on-a-server-or-nas)
 
 ## Host on fly.io
 With the fly.io setup, you will get a personal, password-protected Nitter instance on the Internet.

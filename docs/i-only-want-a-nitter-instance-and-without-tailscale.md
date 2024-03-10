@@ -1,7 +1,7 @@
 ### I only want a Nitter instance and without Tailscale
 Notice: Since this setup could potentially expose the Nitter instance to the Internet, to prevent malicious scrapers, an nginx instance is in front of the Nitter instance with the following protections:
 
-* All RSS paths are protected with a predefined key/password as a query parameter, e.g. `nitter.net/elonmusk/rss?key=<PREDEFINED PASSWORD>`
+* All RSS paths are protected with a predefined password as a query parameter, e.g. `nitter.net/elonmusk/rss?key=<PREDEFINED PASSWORD>`
 * All others paths (except for static resources such as js and css, pictures and videos) are protected with HTTP basic authentication, e.g. when someone goes to a link, they need to enter a predefined username/password combo
 
 1. Clone this repo on your NAS/server.
@@ -25,13 +25,14 @@ Some customizations you can make to your Nitter instance in the `nitter.conf` fi
 * `infiniteScroll`: Whether to enable infinite scrolling. Enabling this option will load Javascript on the web UI.
 
 4. Create a `.htpasswd` file
+
 Go to a website (I used https://iplocation.io/htaccess-secure-directory) or use the `htpasswd` CLI to generate a `.htpasswd` file under this directory. **This will be the username/password combo that protected the web interfaces of the Nitter instance.**
 
 5. Customize your nginx configuration
 ```
 cp nitter-guardian.nginx.example.conf nitter-guardian.nginx.conf
 ```
-**Be sure to replace `RSS_PASSWORD` in your `nitter-guardian.nginx.conf` with your own. This will be the password that proteced RSS feeds of the Nitter instance**
+**Be sure to replace `RSS_PASSWORD` in your `nitter-guardian.nginx.conf` with your own. This will be the password that proteced RSS feeds of the Nitter instance.**
 
 6. Run this command to run the services
 ```
