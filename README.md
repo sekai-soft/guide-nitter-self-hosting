@@ -48,5 +48,9 @@ Depending on what you specific components you want from the `What can you expect
 * [I only want a Nitter instance and without Tailscale](./docs/i-only-want-a-nitter-instance-and-without-tailscale.md)
 * [I only want a Nitter instance and crossposting without Tailscale](./docs/i-only-want-a-nitter-instance-and-crossposting-without-tailscale.md)
 
+## Potential new stuff
+- [ ] An integrated web interface/server that handles all the credential retrieving, Nitter configuration, nginx configuration, etc. so that one can just start the Docker container/fly.io app, go to the web interface, fill in burner account info, predefined passwords and configurations, and start using, instead of fiddling in a terminal.
+- [ ] Other PaaS such as Railway, Zeit, PikaPod.
+
 ## Like what you see?
 Consider support us on [Patreon](https://www.patreon.com/sekaisoft) :)
