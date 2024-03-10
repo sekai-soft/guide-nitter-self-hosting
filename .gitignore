@@ -1,3 +1,5 @@
 nitter-guest_accounts.json
 nitter.conf
 .env
+.htpasswd
+nitter-guardian.nginx.conf

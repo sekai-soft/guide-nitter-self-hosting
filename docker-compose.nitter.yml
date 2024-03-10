@@ -6,8 +6,8 @@ services:
   nitter:
     image: ghcr.io/sekai-soft/nitter:master
     # container_name: nitter
-    ports:
-      - "8080:80"
+    # ports:
+    #   - "8080:80"
     volumes:
       - ./nitter.conf:/src/nitter.conf:Z,ro
       - ./nitter-guest_accounts.json:/src/guest_accounts.json:Z,ro
@@ -44,5 +44,16 @@ services:
     container_name: nitter-auth
     stdin_open: true
     tty: true
+  nitter-guardian:
+    image: nginx
+    # container_name: nitter-guardian
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./nitter-guardian.nginx.conf:/etc/nginx/conf.d/default.conf:Z,ro
+      - ./.htpasswd:/etc/nginx/.htpasswd:Z,ro
+    depends_on:
+      - nitter
+    restart: unless-stopped
 volumes:
   nitter-redis:
