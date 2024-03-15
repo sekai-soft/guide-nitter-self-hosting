@@ -1,7 +1,7 @@
 ### I only want a Nitter instance and crossposting without Tailscale
 1. Clone this repo on your NAS/server.
 ```
-git clone https://github.com/sekai-soft/freebird && cd freebird
+git clone https://github.com/sekai-soft/guide-nitter-self-hosting && cd guide-nitter-self-hosting
 ```
 
 2. Run this command to obtain credentials for your **burner/temporary** Twitter account

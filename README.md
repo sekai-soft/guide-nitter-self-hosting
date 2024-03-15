@@ -1,5 +1,4 @@
-# FreeBird
-A guide for self-hosting a Nitter instance
+# A guide for self-hosting a Nitter instance
 
 ## Why
 [Nitter](https://github.com/zedeus/nitter) is a fantastic alternative frontend for Twitter. Instead of using Twitter's official web interface or app, which contains ads or algorithmic contents that you may not like, Nitter enables you to **browse** Twitter content without those potential distractions. Nitter also exposes Twitter contents as RSS feeds so that you can 1) view them in an RSS reader 2) manipulate them programatically, such as crossposting to Mastodon, filtering and archiving.

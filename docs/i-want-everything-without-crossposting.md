@@ -12,7 +12,7 @@
 
 2. Clone this repo on your NAS/server.
 ```
-git clone https://github.com/sekai-soft/freebird && cd freebird
+git clone https://github.com/sekai-soft/guide-nitter-self-hosting && cd guide-nitter-self-hosting
 ```
 
 3. Run this command to obtain credentials for your **burner/temporary** Twitter account

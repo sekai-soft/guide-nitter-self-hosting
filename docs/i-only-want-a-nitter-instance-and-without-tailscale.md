@@ -6,7 +6,7 @@ Notice: Since this setup could potentially expose the Nitter instance to the Int
 
 1. Clone this repo on your NAS/server.
 ```
-git clone https://github.com/sekai-soft/freebird && cd freebird
+git clone https://github.com/sekai-soft/guide-nitter-self-hosting && cd guide-nitter-self-hosting
 ```
 
 2. Run this command to obtain credentials for your **burner/temporary** Twitter account

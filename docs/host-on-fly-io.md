@@ -10,7 +10,7 @@ Notice: Since this setup exposes the Nitter instance to the Internet, to prevent
 
 3. Clone this repo to your computer.
 ```
-git clone https://github.com/sekai-soft/freebird && cd freebird
+git clone https://github.com/sekai-soft/guide-nitter-self-hosting && cd guide-nitter-self-hosting
 ```
 
 4. Run this command to obtain credentials for your **burner/temporary** Twitter account
@@ -26,7 +26,7 @@ cd .. && git clone https://github.com/sekai-soft/nitter.git && cd nitter
 
 6. Copy over the Twitter credentials
 ```
-cp ../freebird/nitter-guest_accounts.json guest_accounts.json
+cp ../guide-nitter-self-hosting/nitter-guest_accounts.json guest_accounts.json
 ```
 
 7. Customize your Nitter instance
