@@ -1,4 +1,4 @@
-### I only want a Nitter instance and crossposting without Tailscale
+### I only want a Nitter instance for crossposting
 1. Clone this repo on your NAS/server.
 ```
 git clone https://github.com/sekai-soft/guide-nitter-self-hosting && cd guide-nitter-self-hosting

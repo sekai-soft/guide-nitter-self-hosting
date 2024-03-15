@@ -1,4 +1,4 @@
-### I want everything! (without crossposting)
+### I want a Nitter instance for RSS reading in Tailscale
 1. You need to setup Tailscale
     1. [Sign up](https://login.tailscale.com/start) for a Tailscale account if you haven't already
     2. Tailscale clients are installed on devices that you want to access Nitter and miniflux with. Install from [here](https://tailscale.com/download).

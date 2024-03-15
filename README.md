@@ -9,18 +9,6 @@ There were once [public Nitter instances](https://github.com/zedeus/nitter/wiki/
 
 However, regardless of the demise of public Nitter instances, it is still possible to use Nitter as long as you host your own instance and use it on a personal scale only, and this is a guide that helps you do exactly that.
 
-## What can you expect
-* A [Nitter](https://github.com/zedeus/nitter) instance
-    * Notice that only 1) viewing profiles and 2) view individual tweets are the pages/RSS feeds that I personally use and can commit offering support to. I personally cannot commit to offering support for other pages/RSS feeds such as search.
-    * The Nitter instance is also protected by either 1) an nginx instance that password-protects all web interfaces and RSS feeds or 2) a Tailscale private network so that only you on your personal devices can access the Nitter instance. The reason for such protection is rampant web scrapers that can cause your instance to be heavily rate limited by Twitter's servers.
-
-Depending on the setup you pick later, you can optionally have
-* A [miniflux](https://github.com/miniflux/v2) instance that can poll Twitter accounts from the Nitter instance as RSS feeds
-    * Depending on the volume of Twitter accounts that you want to follow, the miniflux instance may not be able to poll the absolutely latest tweet timely.
-    * A custom polling scheduler for Miniflux is included so that instead of polling all accounts all at once and causing the Nitter instance to be rate-limited, Twitter accounts are polled one by one and with random time intervals in between.
-* A [rss-lambda](https://github.com/k-t-corp/rss-lambda) instance that you can use to perform operations such as filter by keyword on RSS feeds.
-* A [nitter-xposter](https://github.com/k-t-corp/nitter-xposter) instance that you can use to crosspost from (public) Twitter accounts to Mastodon and Bluesky accounts
-
 ## What do you need
 * A **burner/temporary** Twitter account **without 2FA enabled** (sign up [here](https://twitter.com/i/flow/signup))
 * Some Linux and terminal knowledge
@@ -41,11 +29,17 @@ You need a computer with Docker installed (verify by running `docker run hello-w
 ## Host on a server or NAS
 You need a server or NAS running Linux on x86_64 or arm64 with Docker installed (verify by running `docker run hello-world` and `docker compose -v` if you are unsure)
 
-Depending on what you specific components you want from the `What can you expect` section, you may pick one of the following setups
+You have a choice between three use cases
 
-* [I want everything! (without crossposting)](./docs/i-want-everything-without-crossposting.md)
-* [I only want a Nitter instance and without Tailscale](./docs/i-only-want-a-nitter-instance-and-without-tailscale.md)
-* [I only want a Nitter instance and crossposting without Tailscale](./docs/i-only-want-a-nitter-instance-and-crossposting-without-tailscale.md)
+* [I only want a Nitter instance](./docs/i-only-want-a-nitter-instance.md)
+* [I only want a Nitter instance for crossposting](./docs/i-only-want-a-nitter-instance-for-crossposting.md)
+* [I want a Nitter instance for RSS reading in Tailscale](./docs/i-want-a-nitter-instance-for-rss-reading-in-tailscale.md)
+    * Notice that this setup contains a few extra things in addition to the bare minimal Nitter instance for RSS reading in a Tailscale private network.
+        * A [miniflux](https://github.com/miniflux/v2) instance that can poll Twitter accounts from the Nitter instance as RSS feeds
+            * Depending on the volume of Twitter accounts that you want to follow, the miniflux instance may not be able to poll the absolutely latest tweet timely.
+            * A custom polling scheduler for Miniflux is included so that instead of polling all accounts all at once and causing the Nitter instance to be rate-limited, Twitter accounts are polled one by one and with random time intervals in between.
+        * A [rss-lambda](https://github.com/k-t-corp/rss-lambda) instance that you can use to perform operations such as filter by keyword on RSS feeds.
+        * Everything in this setup is provisioned in a [Tailscale](https://tailscale.com/) private network so that you can access Nitter and miniflux (even via a third-party RSS reader) without exposing them to the Internet and on the go.
 
 ## Potential new stuff
 - [ ] Other PaaS such as Railway, Zeit, PikaPod.

@@ -1,4 +1,4 @@
-### I only want a Nitter instance and without Tailscale
+### I only want a Nitter instance
 Notice: Since this setup could potentially expose the Nitter instance to the Internet, to prevent malicious scrapers, an nginx instance is in front of the Nitter instance with the following protections:
 
 * All RSS paths are protected with a predefined password as a query parameter, e.g. `nitter.net/elonmusk/rss?key=<PREDEFINED PASSWORD>`
