@@ -74,7 +74,7 @@ flyctl secrets set --detach INSTANCE_INFINITE_SCROLL=1
 
 6. Deploy the fly.io app
 ```
-flyctl launch
+flyctl deploy
 ```
 
 If everything goes well, at the end of the command run, you should see a URL that resembles `https://nitter-SOME-RANDOM-WORDS.fly.dev/`. This URL will be your personal, password-protected Nitter instance!
