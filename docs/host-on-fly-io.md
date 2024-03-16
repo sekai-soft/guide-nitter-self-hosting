@@ -8,62 +8,77 @@ Notice: Since this setup exposes the Nitter instance to the Internet, to prevent
 
 2. [Sign up and sign in using flyctl](https://fly.io/docs/hands-on/sign-up-sign-in/)
 
-3. Clone this repo to your computer.
+3. Clone my Nitter fork to your computer.
 ```
-git clone https://github.com/sekai-soft/guide-nitter-self-hosting && cd guide-nitter-self-hosting
-```
-
-4. Run this command to obtain credentials for your **burner/temporary** Twitter account
-```
-docker compose run --build nitter-auth
-```
-At the end of the command run, follow instructions "In terminal, run the following command"
-
-5. Clone my Nitter fork to your computer.
-```
-cd .. && git clone https://github.com/sekai-soft/nitter.git && cd nitter
+git clone https://github.com/sekai-soft/nitter.git && cd nitter
 ```
 
-6. Copy over the Twitter credentials
+4. Create a fly.io app (not deployed yet)
 ```
-cp ../guide-nitter-self-hosting/nitter-guest_accounts.json guest_accounts.json
-```
-
-7. Customize your Nitter instance
-```
-cp nitter.example.conf fly.nitter.conf
-```
-Some customizations you can make to your Nitter instance in the `fly.nitter.conf` file
-* `title`: Name of your Nitter instance shown on the web UI
-* `theme`: Default theme of the web UI. Available options are `Black`, `Dracula`, `Mastodon`, `Nitter`, `Pleroma`, `Twitter` and `Twitter Dark`.
-* `infiniteScroll`: Whether to enable infinite scrolling. Enabling this option will load Javascript on the web UI.
-
-8. Create a `.htpasswd` file
-
-Go to a website (I used https://iplocation.io/htaccess-secure-directory) or use the `htpasswd` CLI to generate a `.htpasswd` file under this directory. **This will be the username/password combo that protects the web interfaces of the Nitter instance.**
-
-The resulting `.htpasswd` file's content should look something like
-
-```
-username:$apr1$somehash...
+flyctl launch --no-deploy
 ```
 
-9. Customize your nginx configuration
-```
-cp fly.nginx-site.example.conf fly.nginx-site.conf
-```
-**Be sure to replace `RSS_PASSWORD` in your `fly.nginx-site.conf` with your own. This will be the password that proteced RSS feeds of the Nitter instance.**
-
-10. Run this command to launch the instance on fly.io
-```
-flyctl launch
-```
 When prompted "Would you like to copy its configuration to the new app?", answer `y` (yes)
 
 When prompted "Do you want to tweak these settings before proceeding?", answer `N` (no)
 
-If everything goes well, at the end of the command run, you should see a URL that resembles `nitter-SOME-RANDOM-WORDS.fly.dev`. This URL will be your personal, password-protected Nitter instance!
+5. Customize your Nitter instance
+
+* **Required:** Burner/temporary Twitter account username
+
+```
+flyctl secrets set --detach TWITTER_USERNAME=<your twitter account username>
+```
+
+* **Required:** Burner/temporary Twitter account password
+
+```
+flyctl secrets set --detach TWITTER_PASSWORD=<your twitter account password>
+```
+
+* **Required:** RSS password
+
+```
+flyctl secrets set --detach INSTANCE_RSS_PASSWORD=<your rss password>
+```
+
+* **Required:** Web UI username
+
+```
+flyctl secrets set --detach INSTANCE_WEB_USERNAME=<your web ui username>
+```
+
+* **Required:** Web UI password
+
+```
+flyctl secrets set --detach INSTANCE_WEB_PASSWORD=<your web ui password>
+```
+
+* Optional: Name of your Nitter instance shown on the web UI
+
+```
+flyctl secrets set --detach INSTANCE_TITLE=<your instance title>
+```
+
+* Optional: Default theme of the web UI. Available options are `Black`, `Dracula`, `Mastodon`, `Nitter`, `Pleroma`, `Twitter` and `Twitter Dark`.
+
+```
+flyctl secrets set --detach INSTANCE_TITLE=<your instance default theme>
+```
+
+* Optional: Whether to enable infinite scrolling. Enabling this option will load Javascript on the web UI.
+
+```
+flyctl secrets set --detach INSTANCE_INFINITE_SCROLL=1
+```
+
+6. Deploy the fly.io app
+```
+flyctl launch
+```
+
+If everything goes well, at the end of the command run, you should see a URL that resembles `https://nitter-SOME-RANDOM-WORDS.fly.dev/`. This URL will be your personal, password-protected Nitter instance!
 
 You should now be able to
-* Access your Nitter instance from `https://YOUR-NITTER-INSTANCE-NAME.fly.dev` after you've entered the username/password combo you used to generate `.htpasswd` in step 8.
-* Access a RSS feed for your Nitter instance such as `https://YOUR-NITTER-INSTANCE-NAME.fly.dev/elonmusk/rss?key=<PASSWORD>`, while `<PASSWORD>` being the `RSS_PASSWORD` you specified in step 9. You should also be able use this password-suffixed RSS feed in RSS readers or any applications that handle RSS feeds.
+* Access your Nitter instance from `https://YOUR-NITTER-INSTANCE-NAME.fly.dev` after you've entered the Web UI username/password combo you entered in step 5
+* Access a RSS feed for your Nitter instance such as `https://YOUR-NITTER-INSTANCE-NAME.fly.dev/elonmusk/rss?key=<PASSWORD>`, while `<PASSWORD>` being the RSS password you entered in step 5. You should also be able use this password-suffixed RSS feed in RSS readers or any applications that handle RSS feeds.
