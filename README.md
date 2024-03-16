@@ -22,7 +22,7 @@ With the fly.io setup, you will get a personal, password-protected Nitter instan
 
 Although fly.io is a paid platform, the setup uses as minimal as possible resources and your usage should fall into their free tier as long as you keep it just for personal usage.
 
-You need a computer with Docker installed (verify by running `docker run hello-world` and `docker compose -v` if you are unsure), then follow this guide
+ Follow this guide
 
 [Host on fly.io](./docs/host-on-fly-io.md)
 
