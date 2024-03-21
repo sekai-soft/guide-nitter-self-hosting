@@ -10,10 +10,13 @@ logging.basicConfig(
     level=logging.INFO,
     datefmt='%Y-%m-%d %H:%M:%S')
 
-# Creating a client using username / password authentication
-client = miniflux.Client("http://miniflux", username="admin", password="test123")
+miniflux_url = os.getenv("REFRESHER_MINIFLUX_URL", "http://miniflux")
+miniflux_username = os.getenv("REFRESHER_MINIFLUX_USERNAME", "admin")
+miniflux_password = os.getenv("REFRESHER_MINIFLUX_PASSWORD", "test123")
+client = miniflux.Client(miniflux_url, username=miniflux_username, password=miniflux_password)
 
-refresh_interval_seconds = 60
+refresh_interval_seconds = int(os.getenv("REFRESHER_REFRESH_INTERVAL_SECONDS", "60"))
+hearbeat_url = os.getenv("REFRESHER_HEARTBEAT_URL")
 
 while True:
     feeds = client.get_feeds()
@@ -26,8 +29,7 @@ while True:
         feed_sleep_seconds = refresh_interval_seconds + random.randint(1, refresh_interval_seconds)
         logging.info(f"Feed sleeping for {feed_sleep_seconds} seconds")
         time.sleep(feed_sleep_seconds)
-        if os.getenv("REFRESHER_HEARTBEAT_URL"):
-            hearbeat_url = os.getenv("REFRESHER_HEARTBEAT_URL")
+        if hearbeat_url:
             try:
                 requests.get(hearbeat_url)
             except Exception as e:
