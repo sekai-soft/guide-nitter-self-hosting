@@ -1,7 +1,9 @@
+import os
 import time
 import random
 import logging
 import miniflux
+import requests
 
 logging.basicConfig(
     format='%(asctime)s %(levelname)-8s %(message)s',
@@ -24,6 +26,12 @@ while True:
         feed_sleep_seconds = refresh_interval_seconds + random.randint(1, refresh_interval_seconds)
         logging.info(f"Feed sleeping for {feed_sleep_seconds} seconds")
         time.sleep(feed_sleep_seconds)
+        if os.getenv("REFRESHER_HEARTBEAT_URL"):
+            hearbeat_url = os.getenv("REFRESHER_HEARTBEAT_URL")
+            try:
+                requests.get(hearbeat_url)
+            except Exception as e:
+                logging.error(f"Error sending heartbeat but continuing: {e}")
     loop_sleep_seconds = refresh_interval_seconds * len(feeds) * 2
     logging.info(f"Loop sleeping for {loop_sleep_seconds}; there were {len(feeds)} feeds")
     time.sleep(loop_sleep_seconds)
