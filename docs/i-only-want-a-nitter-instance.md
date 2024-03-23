@@ -22,6 +22,7 @@ Fill in the `.env` file
 * Optional `INSTANCE_TITLE`: Name of your Nitter instance shown on the web UI
 * Optional `INSTANCE_THEME`: Default theme of the web UI. Available options are `Black`, `Dracula`, `Mastodon`, `Nitter`, `Pleroma`, `Twitter` and `Twitter Dark`.
 * Optional `INSTANCE_INFINITE_SCROLL`: Whether to enable infinite scrolling. Enabling this option will load Javascript on the web UI. Set it to `1` to enable.
+* Optional `INSTANCE_HOSTNAME`: The hostname used to render public-facing URLs such as hyperlinks in RSS feeds.
 
 3. Run the services
 ```
