@@ -19,6 +19,7 @@ Fill in the `.env` file
 * **(Required)** `INSTANCE_RSS_PASSWORD`: RSS password
 * **(Required)** `INSTANCE_WEB_USERNAME`: Web UI username
 * **(Required)** `INSTANCE_WEB_PASSWORD`: Web UI password
+* Optional `INSTANCE_BASE64_MEDIA`: Whether to enable base64-encoded media. Set it to `1` to enable.
 * Optional `INSTANCE_TITLE`: Name of your Nitter instance shown on the web UI
 * Optional `INSTANCE_THEME`: Default theme of the web UI. Available options are `Black`, `Dracula`, `Mastodon`, `Nitter`, `Pleroma`, `Twitter` and `Twitter Dark`.
 * Optional `INSTANCE_INFINITE_SCROLL`: Whether to enable infinite scrolling. Enabling this option will load Javascript on the web UI. Set it to `1` to enable.
