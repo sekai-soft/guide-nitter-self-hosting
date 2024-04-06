@@ -13,17 +13,20 @@ git clone https://github.com/sekai-soft/guide-nitter-self-hosting && cd guide-ni
 ```
 cp nitter.example.conf nitter.conf
 ```
+
 Fill in the `.env` file
-* **(Required)** `TWITTER_USERNAME`: Burner/temporary Twitter account username
-* **(Required)** `TWITTER_PASSWORD`: Burner/temporary Twitter account password
-* **(Required)** `INSTANCE_RSS_PASSWORD`: RSS password
-* **(Required)** `INSTANCE_WEB_USERNAME`: Web UI username
-* **(Required)** `INSTANCE_WEB_PASSWORD`: Web UI password
-* Optional `INSTANCE_BASE64_MEDIA`: Whether to enable base64-encoded media. Set it to `1` to enable.
-* Optional `INSTANCE_TITLE`: Name of your Nitter instance shown on the web UI
-* Optional `INSTANCE_THEME`: Default theme of the web UI. Available options are `Black`, `Dracula`, `Mastodon`, `Nitter`, `Pleroma`, `Twitter` and `Twitter Dark`.
-* Optional `INSTANCE_INFINITE_SCROLL`: Whether to enable infinite scrolling. Enabling this option will load Javascript on the web UI. Set it to `1` to enable.
-* Optional `INSTANCE_HOSTNAME`: The hostname used to render public-facing URLs such as hyperlinks in RSS feeds.
+
+Here is a list of **required** environment variables
+
+* `TWITTER_USERNAME`
+* `TWITTER_PASSWORD`
+* `INSTANCE_RSS_PASSWORD`
+* `INSTANCE_WEB_USERNAME`
+* `INSTANCE_WEB_PASSWORD`
+
+Consult [this table](https://github.com/sekai-soft/nitter/blob/master/docs/self-contained-docker-image.md#how-to-use) for what each environment variable means and fill in each one
+
+[The table](https://github.com/sekai-soft/nitter/blob/master/docs/self-contained-docker-image.md#how-to-use) also contains several customization options such as instance title and instance default theme that you might be interested in.
 
 3. Run the services
 ```
