@@ -7,7 +7,7 @@ services:
     image: ghcr.io/sekai-soft/nitter-self-contained
     container_name: nitter
     ports:
-      - "0.0.0.0:8080:8081"
+      - "0.0.0.0:8080:8080"
     volumes:
       - nitter-data:/nitter-data
     depends_on:
@@ -21,7 +21,7 @@ services:
       - .env
     restart: unless-stopped
     healthcheck:
-      test: wget -nv --tries=1 --spider http://127.0.0.1:80 || exit 1
+      test: wget -nv --tries=1 --spider http://127.0.0.1:8080 || exit 1
       interval: 5s
       timeout: 5s
       retries: 12
