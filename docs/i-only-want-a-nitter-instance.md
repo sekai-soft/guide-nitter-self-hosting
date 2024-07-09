@@ -11,7 +11,7 @@ git clone https://github.com/sekai-soft/guide-nitter-self-hosting && cd guide-ni
 
 2. Make neccessary and optional configuration changes
 ```
-cp nitter.example.conf nitter.conf
+cp .example.env .env
 ```
 
 Fill in the `.env` file
