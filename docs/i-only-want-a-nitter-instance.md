@@ -9,11 +9,6 @@ Notice: Since this setup could potentially expose the Nitter instance to the Int
 git clone https://github.com/sekai-soft/guide-nitter-self-hosting && cd guide-nitter-self-hosting
 ```
 
-2. Make neccessary and optional configuration changes
-```
-cp .example.env .env
-```
-
 Fill in the `.env` file
 
 Here is a list of **required** environment variables
