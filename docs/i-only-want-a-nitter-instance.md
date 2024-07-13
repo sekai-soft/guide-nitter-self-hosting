@@ -9,11 +9,6 @@ Notice: Since this setup could potentially expose the Nitter instance to the Int
 git clone https://github.com/sekai-soft/guide-nitter-self-hosting && cd guide-nitter-self-hosting
 ```
 
-2. Make neccessary and optional configuration changes
-```
-cp .example.env .env
-```
-
 Fill in the `.env` file
 
 Here is a list of **required** environment variables
@@ -28,7 +23,7 @@ Consult [this table](https://github.com/sekai-soft/nitter/blob/master/docs/self-
 
 [The table](https://github.com/sekai-soft/nitter/blob/master/docs/self-contained-docker-image.md#how-to-use) also contains several customization options such as instance title and instance default theme that you might be interested in.
 
-3. Run the services
+2. Run the services
 ```
 docker compose -f docker-compose.nitter.yml up -d
 ```
