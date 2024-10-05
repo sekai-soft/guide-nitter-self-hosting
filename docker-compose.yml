@@ -1,139 +1,42 @@
 version: "3"
 
+name: nitter-only
+
 services:
   nitter:
-    image: ghcr.io/sekai-soft/nitter:master
+    image: ghcr.io/sekai-soft/nitter-self-contained
     container_name: nitter
+    ports:
+      - "0.0.0.0:8080:8080"
     volumes:
-      - ./nitter.conf:/src/nitter.conf:Z,ro
-      - ./nitter-guest_accounts.json:/src/guest_accounts.json:Z,ro
+      - nitter-data:/nitter-data
     depends_on:
-      - nitter-redis
+      nitter-redis:
+        condition: service_healthy
+    environment:
+      - NITTER_ACCOUNTS_FILE=/nitter-data/guest_accounts.json
+      - DISABLE_REDIS=1
+      - REDIS_HOST=nitter-redis
+    env_file:
+      - .env
     restart: unless-stopped
     healthcheck:
-      test: wget -nv --tries=1 --spider http://127.0.0.1:80 || exit 1
-      interval: 30s
+      test: wget -nv --tries=1 --spider http://127.0.0.1:8080 || exit 1
+      interval: 5s
       timeout: 5s
-      retries: 2
-    read_only: true
-    security_opt:
-      - no-new-privileges:true
-    cap_drop:
-      - ALL
-    network_mode: service:nitter-ts
+      retries: 12
   nitter-redis:
     image: redis:6-alpine
-    container_name: nitter-redis
+    container_name: redis
     command: redis-server --save 60 1 --loglevel warning
     volumes:
       - nitter-redis:/data
     restart: unless-stopped
     healthcheck:
       test: redis-cli ping
-      interval: 30s
+      interval: 5s
       timeout: 5s
-      retries: 2
-  nitter-auth:
-    build:
-      context: nitter-auth
-      dockerfile: Dockerfile
-    container_name: nitter-auth
-    stdin_open: true
-    tty: true
-  miniflux:
-    image: miniflux/miniflux:latest
-    container_name: miniflux
-    healthcheck:
-      test: ["CMD", "/usr/bin/miniflux", "-healthcheck", "auto"]
-    depends_on:
-      miniflux-db:
-        condition: service_healthy
-      nitter:
-        condition: service_healthy
-    environment:
-      - DATABASE_URL=postgres://miniflux:secret@miniflux-db/miniflux?sslmode=disable
-      - RUN_MIGRATIONS=1
-      - CREATE_ADMIN=1
-      - ADMIN_USERNAME=admin
-      - ADMIN_PASSWORD=test123
-      - PORT=80
-      - BASE_URL=http://miniflux/
-      - LOG_DATE_TIME=1
-      - POLLING_FREQUENCY=720
-    restart: unless-stopped
-    network_mode: service:miniflux-ts
-  miniflux-db:
-    image: postgres:15
-    container_name: miniflux-db
-    environment:
-      - POSTGRES_USER=miniflux
-      - POSTGRES_PASSWORD=secret
-      - POSTGRES_DB=miniflux
-    volumes:
-      - miniflux-db:/var/lib/postgresql/data
-    healthcheck:
-      test: ["CMD", "pg_isready", "-U", "miniflux"]
-      interval: 10s
-      start_period: 30s
-    restart: unless-stopped
-  miniflux-chilled-refresher:
-    build:
-      context: miniflux-chilled-refresher
-      dockerfile: Dockerfile
-    container_name: miniflux-chilled-refresher
-    depends_on:
-      - miniflux
-    restart: unless-stopped
-  nitter-ts:
-    image: tailscale/tailscale:latest
-    container_name: nitter-ts
-    hostname: nitter
-    environment:
-      TS_AUTHKEY: ${TS_AUTHKEY}
-      TS_STATE_DIR: /var/lib/tailscale
-    volumes:
-      - nitter-ts:/var/lib/tailscale
-      - /dev/net/tun:/dev/net/tun
-    cap_add:
-      - net_admin
-      - sys_module
-    restart: unless-stopped
-  miniflux-ts:
-    image: tailscale/tailscale:latest
-    container_name: miniflux-ts
-    hostname: miniflux
-    environment:
-      TS_AUTHKEY: ${TS_AUTHKEY}
-      TS_STATE_DIR: /var/lib/tailscale
-    volumes:
-      - miniflux-ts:/var/lib/tailscale
-      - /dev/net/tun:/dev/net/tun
-    cap_add:
-      - net_admin
-      - sys_module
-  rss-lambda:
-    image: ghcr.io/k-t-corp/rss-lambda:latest
-    container_name: rss-lambda
-    restart: unless-stopped
-    network_mode: service:rss-lambda-ts
-    environment:
-      - PORT=80
-  rss-lambda-ts:
-    image: tailscale/tailscale:latest
-    container_name: rss-lambda-ts
-    hostname: rss-lambda
-    environment:
-      TS_AUTHKEY: ${TS_AUTHKEY}
-      TS_STATE_DIR: /var/lib/tailscale
-    volumes:
-      - rss-lambda-ts:/var/lib/tailscale
-      - /dev/net/tun:/dev/net/tun
-    cap_add:
-      - net_admin
-      - sys_module
+      retries: 12
 volumes:
+  nitter-data:
   nitter-redis:
-  miniflux-db:
-  miniflux-ts:
-  nitter-ts:
-  rss-lambda-ts:

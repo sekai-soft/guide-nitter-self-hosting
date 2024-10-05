@@ -25,7 +25,7 @@ Consult [this table](https://github.com/sekai-soft/nitter/blob/master/docs/self-
 
 2. Run the services
 ```
-docker compose -f docker-compose.nitter.yml up -d
+docker compose up -d
 ```
 If everything goes well, you should now be able to
 * Access your Nitter instance from `http://localhost:8080` after you've entered the Web UI username/password combo you used in step 2.

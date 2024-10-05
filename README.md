@@ -27,21 +27,8 @@ Although fly.io is a paid platform, the setup uses as minimal as possible resour
 ## Host on a server or NAS
 You need a server or NAS running Linux on x86_64 or arm64 with Docker installed (verify by running `docker run hello-world` and `docker compose -v` if you are unsure)
 
-You have a choice between three use cases
-
-* [I only want a Nitter instance](./docs/i-only-want-a-nitter-instance.md)
-* [I only want a Nitter instance for crossposting](./docs/i-only-want-a-nitter-instance-for-crossposting.md)
-* [I want a Nitter instance for RSS reading in Tailscale](./docs/i-want-a-nitter-instance-for-rss-reading-in-tailscale.md)
-    * Notice that this setup contains a few extra things in addition to the bare minimal Nitter instance for RSS reading in a Tailscale private network.
-        * A [miniflux](https://github.com/miniflux/v2) instance that can poll Twitter accounts from the Nitter instance as RSS feeds
-            * Depending on the volume of Twitter accounts that you want to follow, the miniflux instance may not be able to poll the absolutely latest tweet timely.
-            * A custom polling scheduler for Miniflux is included so that instead of polling all accounts all at once and causing the Nitter instance to be rate-limited, Twitter accounts are polled one by one and with random time intervals in between.
-        * A [rss-lambda](https://github.com/k-t-corp/rss-lambda) instance that you can use to perform operations such as filter by keyword on RSS feeds.
-        * Everything in this setup is provisioned in a [Tailscale](https://tailscale.com/) private network so that you can access Nitter and miniflux (even via a third-party RSS reader) without exposing them to the Internet and on the go.
+* [Guide](./docs/guide.md)
 
 ## Potential new stuff
 - [ ] Other PaaS such as Railway, Zeit, PikaPod.
-- [ ] An integrated docker entrypoint that handles all the credential retrieving, Nitter configuration, nginx configuration, etc., so that one can just start the Docker container/fly.io app with environment variables and start using the instance, instead of fiddling in a terminal.
-
-## Like what you see?
-Consider support us on [Patreon](https://www.patreon.com/sekaisoft) :)
+- [x] An integrated docker entrypoint that handles all the credential retrieving, Nitter configuration, nginx configuration, etc., so that one can just start the Docker container/fly.io app with environment variables and start using the instance, instead of fiddling in a terminal.
