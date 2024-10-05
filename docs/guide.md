@@ -36,9 +36,9 @@ Simply add the following two environment variables to the `.env` file
 
 ## 3. (Optional) Customize the Nitter instance
 
-[The table](https://github.com/sekai-soft/nitter/blob/master/docs/self-contained-docker-image.md#how-to-use) also contains several customization options such as instance title and instance default theme that you might be interested in.
+[The table](https://github.com/sekai-soft/nitter/blob/master/docs/self-contained-docker-image.md#how-to-use) also contains several customization options such as instance title and instance default theme that you might be interested in
 
-Simply add the relevant environment variables to the `.env` file.
+Simply add the relevant environment variables to the `.env` file
 
 ## 4. Run the services
 ```
