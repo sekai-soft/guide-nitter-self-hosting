@@ -22,13 +22,16 @@ With the fly.io setup, you will get a personal, password-protected Nitter instan
 
 Although fly.io is a paid platform, the setup uses as minimal as possible resources and your usage should fall into their free tier as long as you keep it just for personal usage.
 
-[Guide](https://github.com/sekai-soft/nitter/blob/master/docs/host-on-fly-io.md)
+[Guide](./docs/fly-io.md)
 
 ## Host on a server or NAS
 You need a server or NAS running Linux on x86_64 or arm64 with Docker installed (verify by running `docker run hello-world` and `docker compose -v` if you are unsure)
 
-[Guide](./docs/guide.md)
+[Guide](./docs/server.md)
 
-## Potential new stuff
-- [ ] Other PaaS such as Railway, Zeit, PikaPod.
-- [x] An integrated docker entrypoint that handles all the credential retrieving, Nitter configuration, nginx configuration, etc., so that one can just start the Docker container/fly.io app with environment variables and start using the instance, instead of fiddling in a terminal.
+## TODO
+- [x] An integrated docker entrypoint that handles all the credential retrieving, Nitter configuration, nginx configuration, etc., so that one can just start the Docker container/fly.io app with environment variables and start using the instance, instead of fiddling in a terminal
+- [ ] An bootstrapping and admin UI
+- [ ] Deploy to Zeabur
+- [ ] Deploy to Railway
+- [ ] Deploy to Vercel
