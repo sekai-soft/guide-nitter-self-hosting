@@ -3,12 +3,11 @@ Notice: Since this setup could potentially expose the Nitter instance to the Int
 * All RSS paths are protected with a predefined password as a query parameter, e.g. `nitter.net/elonmusk/rss?key=<PREDEFINED PASSWORD>`
 * All others paths (except for static resources such as js and css, pictures and videos) are protected with HTTP basic authentication, e.g. when someone goes to a link, they need to enter a predefined username/password combo
 
-## 1. Clone repo on your NAS/server.
-```
-git clone https://github.com/sekai-soft/guide-nitter-self-hosting && cd guide-nitter-self-hosting
-```
+## 1. Create a `docker-compose.yml` file.
+Create a `docker-compose.yml` file by copying [this file](https://github.com/sekai-soft/guide-nitter-self-hosting/blob/master/docker-compose.yml)
 
-## 2. Fill in the `.env` file
+## 2. Create a `.env` file
+Create an empty `.env` file
 
 Here is a list of **required** environment variables
 
@@ -17,6 +16,8 @@ Here is a list of **required** environment variables
 * `INSTANCE_WEB_PASSWORD`
 
 Consult [this table](https://github.com/sekai-soft/nitter/blob/master/docs/self-contained-docker-image.md#how-to-use) for what each environment variable means and fill in each one
+
+Fill in the `.env` file by writing `<ENVIRONMENT_VARIABLE_NAME>=<ENVIRONMENT_VARIABLE_VALUE>`, e.g. `INSTANCE_RSS_PASSWORD=123`
 
 Depending on whether you want to only use one burner Twitter account or multiple ones...
 
@@ -28,7 +29,7 @@ Simply add the following two environment variables to the `.env` file
 * `TWITTER_PASSWORD`
 
 ### Multiple Twitter accounts
-1. Copy `twitter-credentials.example.json` as `twitter-credentials.json`
+1. Create a `twitter-credentials.json` file by copying [this file](https://github.com/sekai-soft/guide-nitter-self-hosting/blob/master/twitter-credentials.example.json)
 
 2. Fill in the `twitter-credentials.json` file with username and passwords. The example has only two accounts but you can of course add as many as you want.
 
