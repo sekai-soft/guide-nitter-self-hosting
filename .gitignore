@@ -3,3 +3,4 @@ nitter.conf
 .env
 .htpasswd
 nitter-guardian.nginx.conf
+twitter-credentials.json
