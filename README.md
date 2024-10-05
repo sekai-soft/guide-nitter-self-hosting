@@ -27,7 +27,7 @@ Although fly.io is a paid platform, the setup uses as minimal as possible resour
 ## Host on a server or NAS
 You need a server or NAS running Linux on x86_64 or arm64 with Docker installed (verify by running `docker run hello-world` and `docker compose -v` if you are unsure)
 
-* [Guide](./docs/guide.md)
+[Guide](./docs/guide.md)
 
 ## Potential new stuff
 - [ ] Other PaaS such as Railway, Zeit, PikaPod.
