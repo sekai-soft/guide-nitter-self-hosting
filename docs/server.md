@@ -1,15 +1,24 @@
-Notice: Since this setup could potentially expose the Nitter instance to the Internet, to prevent malicious scrapers, an nginx instance is in front of the Nitter instance with the following protections:
-
-* All RSS paths are protected with a predefined password as a query parameter, e.g. `nitter.net/elonmusk/rss?key=<PREDEFINED PASSWORD>`
-* All others paths (except for static resources such as js and css, pictures and videos) are protected with HTTP basic authentication, e.g. when someone goes to a link, they need to enter a predefined username/password combo
-
 ## 1. Create a `docker-compose.yml` file.
 Create a `docker-compose.yml` file by copying [this file](https://github.com/sekai-soft/guide-nitter-self-hosting/blob/master/docker-compose.yml)
 
 ## 2. Create a `.env` file
 Create an empty `.env` file
 
-Here is a list of **required** environment variables
+Fill in the `.env` file by writing `<ENVIRONMENT_VARIABLE_NAME>=<ENVIRONMENT_VARIABLE_VALUE>`, e.g. `INSTANCE_RSS_PASSWORD=123`
+
+If you are hosting the Nitter instance on the public Internet, e.g. a public VPS server, you may want to protect it with credentials to prevent malicious scrapers
+
+Otherwise, you can skip the `Fill in instance credentials` section, but
+
+* Change the line `"0.0.0.0:8080:8081"` to `"0.0.0.0:8080:8080"`**
+* Add environment variable `DISABLE_NGINX=1`
+
+### Fill in instance credentials
+
+* All RSS paths will be protected with a predefined password as a query parameter, e.g. `nitter.net/elonmusk/rss?key=<PREDEFINED PASSWORD>`
+* All others paths (except for static resources such as js and css, pictures and videos) will be protected with HTTP basic authentication, e.g. when someone goes to a link, they need to enter a predefined username/password combo
+
+Fill in those environment variables
 
 * `INSTANCE_RSS_PASSWORD`
 * `INSTANCE_WEB_USERNAME`
@@ -17,9 +26,7 @@ Here is a list of **required** environment variables
 
 Consult [this table](https://github.com/sekai-soft/nitter/blob/master/docs/self-contained-docker-image.md#how-to-use) for what each environment variable means and fill in each one
 
-Fill in the `.env` file by writing `<ENVIRONMENT_VARIABLE_NAME>=<ENVIRONMENT_VARIABLE_VALUE>`, e.g. `INSTANCE_RSS_PASSWORD=123`
-
-Depending on whether you want to only use one burner Twitter account or multiple ones...
+Depending on whether you want to only use one burner Twitter account or multiple ones
 
 ### One Twitter account
 
