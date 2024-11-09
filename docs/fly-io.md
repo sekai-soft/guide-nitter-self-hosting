@@ -8,7 +8,7 @@ Notice: Since deploying to fly.io exposes the Nitter instance to the Internet, t
 2. [Sign up and sign in using flyctl](https://fly.io/docs/hands-on/sign-up-sign-in/)
 
 3. Create a `nitter` folder and create a `fly.toml` file inside it.
-Create an empty `fly.toml` file and paste contents from [this file](https://github.com/sekai-soft/nitter/blob/master/fly.toml)
+Create an empty `fly.toml` file and paste contents from [this file](https://github.com/sekai-soft/nitter/blob/master/fly.example.toml)
 
 4. Create a fly.io app (not deployed yet)
 ```
@@ -36,7 +36,7 @@ Here is a list of **required** environment variables for the fly.io app
 * `INSTANCE_WEB_USERNAME`
 * `INSTANCE_WEB_PASSWORD`
 
-Consult [this table](https://github.com/sekai-soft/nitter/blob/master/docs/self-contained-docker-image.md#how-to-use) for what each environment variable means and set each one up
+Consult [this table](https://github.com/sekai-soft/nitter?tab=readme-ov-file#usage) for what each environment variable means and set each one up
 
 For example, to set up `TWITTER_USERNAME`, you would do
 
@@ -44,7 +44,7 @@ For example, to set up `TWITTER_USERNAME`, you would do
 flyctl secrets set --detach TWITTER_USERNAME=<your twitter account username>
 ```
 
-[The table](https://github.com/sekai-soft/nitter/blob/master/docs/self-contained-docker-image.md#how-to-use) also contains several customization options such as instance title and instance default theme that you might be interested in.
+[The table](https://github.com/sekai-soft/nitter?tab=readme-ov-file#usage) also contains several customization options such as instance title and instance default theme that you might be interested in.
 
 6. Deploy the fly.io app
 ```

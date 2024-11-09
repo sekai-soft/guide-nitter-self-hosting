@@ -24,7 +24,7 @@ Fill in those environment variables
 * `INSTANCE_WEB_USERNAME`
 * `INSTANCE_WEB_PASSWORD`
 
-Consult [this table](https://github.com/sekai-soft/nitter/blob/master/docs/self-contained-docker-image.md#how-to-use) for what each environment variable means and fill in each one
+Consult [this table](https://github.com/sekai-soft/nitter?tab=readme-ov-file#usage) for what each environment variable means and fill in each one
 
 Depending on whether you want to only use one burner Twitter account or multiple ones
 
@@ -44,7 +44,7 @@ Simply add the following two environment variables to the `.env` file
 
 ## 3. (Optional) Customize the Nitter instance
 
-[The table](https://github.com/sekai-soft/nitter/blob/master/docs/self-contained-docker-image.md#how-to-use) also contains several customization options such as instance title and instance default theme that you might be interested in
+[This table](https://github.com/sekai-soft/nitter?tab=readme-ov-file#usage) also contains several customization options such as instance title and instance default theme that you might be interested in
 
 Simply add the relevant environment variables to the `.env` file
 
