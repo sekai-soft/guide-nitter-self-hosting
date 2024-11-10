@@ -8,9 +8,9 @@ Fill in the `.env` file by writing `<ENVIRONMENT_VARIABLE_NAME>=<ENVIRONMENT_VAR
 
 If you are hosting the Nitter instance on the public Internet, e.g. a public VPS server, you may want to protect it with credentials to prevent malicious scrapers
 
-Otherwise, you can skip the `Fill in instance credentials` section, but
+Otherwise, you can skip the rest of the section and go to "3. Provide Twitter credentials", but
 
-* Change the line `"0.0.0.0:8080:8081"` to `"0.0.0.0:8080:8080"`**
+* Change the line `"0.0.0.0:8080:8081"` to `"0.0.0.0:8080:8080"`
 * Add environment variable `DISABLE_NGINX=1`
 
 ### Fill in instance credentials
@@ -26,29 +26,18 @@ Fill in those environment variables
 
 Consult [this table](https://github.com/sekai-soft/nitter?tab=readme-ov-file#usage) for what each environment variable means and fill in each one
 
-Depending on whether you want to only use one burner Twitter account or multiple ones
-
-### One Twitter account
-
-Simply add the following two environment variables to the `.env` file
-
-* `TWITTER_USERNAME`
-* `TWITTER_PASSWORD`
-
-### Multiple Twitter accounts
+## 3. Provide Twitter credentials
 1. Create a `twitter-credentials.json` file by copying [this file](https://github.com/sekai-soft/guide-nitter-self-hosting/blob/master/twitter-credentials.example.json)
 
 2. Fill in the `twitter-credentials.json` file with username and passwords. The example has only two accounts but you can of course add as many as you want.
 
-3. In `docker-compose.yml` file, uncomment the two lines that mention `twitter-credentials.json`
-
-## 3. (Optional) Customize the Nitter instance
+## 4. (Optional) Customize the Nitter instance
 
 [This table](https://github.com/sekai-soft/nitter?tab=readme-ov-file#usage) also contains several customization options such as instance title and instance default theme that you might be interested in
 
 Simply add the relevant environment variables to the `.env` file
 
-## 4. Run the services
+## 5. Run the services
 ```
 docker compose up -d
 ```

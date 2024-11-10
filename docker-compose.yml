@@ -6,7 +6,7 @@ services:
       - "0.0.0.0:8080:8081"
     volumes:
       - nitter-data:/nitter-data
-      # - ./twitter-credentials.json:/nitter-data/twitter-credentials.json
+      - ./twitter-credentials.json:/nitter-data/twitter-credentials.json
     depends_on:
       nitter-redis:
         condition: service_healthy
@@ -14,7 +14,7 @@ services:
       - NITTER_ACCOUNTS_FILE=/nitter-data/guest_accounts.json
       - DISABLE_REDIS=1
       - REDIS_HOST=nitter-redis
-      # - TWITTER_CREDENTIALS_FILE=/nitter-data/twitter-credentials.json
+      - TWITTER_CREDENTIALS_FILE=/nitter-data/twitter-credentials.json
     env_file:
       - .env
     restart: unless-stopped
