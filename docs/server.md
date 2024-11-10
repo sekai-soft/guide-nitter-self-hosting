@@ -37,6 +37,8 @@ Consult [this table](https://github.com/sekai-soft/nitter?tab=readme-ov-file#usa
 
 Simply add the relevant environment variables to the `.env` file
 
+Optionally, you can also pass in custom `nitter.conf`. In the `docker-compose.yml` file, uncomment the two lines `- ./nitter.conf:/src/nitter.conf` and `- USE_CUSTOM_CONF=1`
+
 ## 5. Run the services
 ```
 docker compose up -d
