@@ -6,12 +6,9 @@ Create an empty `.env` file
 
 Fill in the `.env` file by writing `<ENVIRONMENT_VARIABLE_NAME>=<ENVIRONMENT_VARIABLE_VALUE>`, e.g. `INSTANCE_RSS_PASSWORD=123`
 
-If you are hosting the Nitter instance on the public Internet, e.g. a public VPS server, you may want to protect it with credentials to prevent malicious scrapers
+If you are hosting the Nitter instance on the public Internet, e.g. a public VPS server, you may want to protect it with credentials to prevent malicious scrapers. Continue to "Fill in instance credentials" section.
 
-Otherwise, you can skip the rest of the section and go to "3. Provide Twitter credentials", but
-
-* Change the line `"0.0.0.0:8080:8081"` to `"0.0.0.0:8080:8080"`
-* Add environment variable `DISABLE_NGINX=1`
+If you are not hosting the Nitter instance on the public Internet and don't care about protecting against malicious scrapers, continue to "Disable instance protection" section
 
 ### Fill in instance credentials
 
@@ -25,6 +22,11 @@ Fill in those environment variables
 * `INSTANCE_WEB_PASSWORD`
 
 Consult [this table](https://github.com/sekai-soft/nitter?tab=readme-ov-file#usage) for what each environment variable means and fill in each one
+
+### Disable instance protection section
+
+* Change the line `"0.0.0.0:8080:8081"` to `"0.0.0.0:8080:8080"`
+* Add environment variable `DISABLE_NGINX=1`
 
 ## 3. Provide Twitter credentials
 1. Create a `twitter-credentials.json` file by copying [this file](https://github.com/sekai-soft/guide-nitter-self-hosting/blob/master/twitter-credentials.example.json)
