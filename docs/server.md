@@ -23,7 +23,7 @@ Fill in those environment variables
 
 Consult [this table](https://github.com/sekai-soft/nitter?tab=readme-ov-file#usage) for what each environment variable means and fill in each one
 
-### Disable instance protection section
+### Disable instance protection
 
 * Change the line `"0.0.0.0:8080:8081"` to `"0.0.0.0:8080:8080"`
 * Add environment variable `DISABLE_NGINX=1`
