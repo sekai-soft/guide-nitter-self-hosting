@@ -13,25 +13,54 @@ However, regardless of the demise of public Nitter instances, it is still possib
 * A **burner/temporary** Twitter account **without 2FA enabled** (sign up [here](https://twitter.com/i/flow/signup))
 * Some Linux and terminal knowledge
 
-## Decide where to host the Nitter instance
-* [fly.io, a Platform-as-a-Service hosting provider](https://fly.io/) -> [go to the "Host on fly.io" section](#host-on-flyio)
-* A server or NAS -> [go to the "Host on a server or NAS" section](#host-on-a-server-or-nas)
+## Steps to host on a server or NAS
+### 1. Create a `docker-compose.yml` file.
+Create a `docker-compose.yml` file by copying [this file](https://github.com/sekai-soft/guide-nitter-self-hosting/blob/master/docker-compose.yml)
 
-## Host on fly.io
-With the fly.io setup, you will get a personal, password-protected Nitter instance on the Internet.
+### 2. Create a `.env` file
+Create an empty `.env` file
 
-Although fly.io is a paid platform, the setup uses as minimal as possible resources and your usage should fall into their free tier as long as you keep it just for personal usage.
+Fill in the `.env` file by writing `<ENVIRONMENT_VARIABLE_NAME>=<ENVIRONMENT_VARIABLE_VALUE>`, e.g. `INSTANCE_RSS_PASSWORD=123`
 
-[Guide](./docs/fly-io.md)
+If you are hosting the Nitter instance on the public Internet, e.g. a public VPS server, you may want to protect it with credentials to prevent malicious scrapers. Continue to "Fill in instance credentials" section.
 
-## Host on a server or NAS
-You need a server or NAS running Linux on x86_64 or arm64 with Docker installed (verify by running `docker run hello-world` and `docker compose -v` if you are unsure)
+If you are not hosting the Nitter instance on the public Internet and don't care about protecting against malicious scrapers, continue to "Disable instance protection" section
 
-[Guide](./docs/server.md)
+#### Fill in instance credentials
 
-## TODO
-- [x] An integrated docker entrypoint that handles all the credential retrieving, Nitter configuration, nginx configuration, etc., so that one can just start the Docker container/fly.io app with environment variables and start using the instance, instead of fiddling in a terminal
-- [ ] An bootstrapping and admin UI
-- [ ] Deploy to Zeabur
-- [ ] Deploy to Railway
-- [ ] Deploy to Vercel
+* All RSS paths will be protected with a predefined password as a query parameter, e.g. `nitter.net/elonmusk/rss?key=<PREDEFINED PASSWORD>`
+* All others paths (except for static resources such as js and css, pictures and videos) will be protected with HTTP basic authentication, e.g. when someone goes to a link, they need to enter a predefined username/password combo
+
+Fill in those environment variables
+
+* `INSTANCE_RSS_PASSWORD`
+* `INSTANCE_WEB_USERNAME`
+* `INSTANCE_WEB_PASSWORD`
+
+Consult [this table](https://github.com/sekai-soft/nitter?tab=readme-ov-file#usage) for what each environment variable means and fill in each one
+
+#### Disable instance protection
+
+* Change the line `"0.0.0.0:8080:8081"` to `"0.0.0.0:8080:8080"`
+* Add environment variable `DISABLE_NGINX=1`
+
+### 3. Provide Twitter credentials
+1. Create a `twitter-credentials.json` file by copying [this file](https://github.com/sekai-soft/guide-nitter-self-hosting/blob/master/twitter-credentials.example.json)
+
+2. Fill in the `twitter-credentials.json` file with username and passwords. The example has only two accounts but you can of course add as many as you want.
+
+### 4. (Optional) Customize the Nitter instance
+
+[This table](https://github.com/sekai-soft/nitter?tab=readme-ov-file#usage) also contains several customization options such as instance title and instance default theme that you might be interested in
+
+Simply add the relevant environment variables to the `.env` file
+
+Optionally, you can also pass in custom `nitter.conf`. In the `docker-compose.yml` file, uncomment the two lines `- ./nitter.conf:/src/nitter.conf` and `- USE_CUSTOM_CONF=1`
+
+### 5. Run the services
+```
+docker compose up -d
+```
+If everything goes well, you should now be able to
+* Access your Nitter instance from `http://localhost:8080` after you've entered the Web UI username/password combo you used in step 2.
+* Access a RSS feed for your Nitter instance such as `http://localhost:8080/elonmusk/rss?key=<PASSWORD>`, while `<PASSWORD>` being the RSS password you specified in step 2. You should also be able use this password-suffixed RSS feed in RSS readers or any applications that handle RSS feeds.

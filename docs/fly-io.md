@@ -1,3 +1,5 @@
+**Notice: I've personally stopped relying on the Nitter instance on fly.io, so this guide won't be updated and support will be best-effort**
+
 Notice: Since deploying to fly.io exposes the Nitter instance to the Internet, to prevent malicious scrapers, an nginx instance is in front of the Nitter instance with the following protections:
 
 * All RSS paths are protected with a predefined password as a query parameter, e.g. `nitter.net/elonmusk/rss?key=<PREDEFINED PASSWORD>`
