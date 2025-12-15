@@ -27,16 +27,7 @@ Change `redisHost = "localhost"` to `redisHost = "nitter-redis"`
 Customize other options of this config file to your liking
 
 ### 3. Obtain credentials
-Clone [Nitter repo](https://github.com/zedeus/nitter)
-
-In the repo, run
-
-```
-pushd tools
-pip3 install pyotp requests
-python3 get_session.py <burner twitter account username> <burner twitter account password> <2fa secret; put 000000 if 2fa is disabled> ../sessions.jsonl
-popd
-```
+Follow Nitter's [guide on obtaining credentials](https://github.com/zedeus/nitter/wiki/Creating-session-tokens)
 
 Place the resulting `sessions.jsonl` to the directory you were working in from the previous step
 
